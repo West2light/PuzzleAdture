@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu]
 [System.Serializable]
 
-public class Shape : ScriptableObject
+public class ShapeData : ScriptableObject
 {
     [System.Serializable]
     public class Row
@@ -16,7 +16,7 @@ public class Shape : ScriptableObject
         }
         public Row(int size)
         {
-
+            CreateRow(size);
         }
         public void CreateRow(int size)
         {
@@ -31,5 +31,25 @@ public class Shape : ScriptableObject
                 column[i] = false;
             }
         }
+    }
+
+    public int columns = 0;
+    public int rows = 0;
+    public Row[] board;
+    public void Clear()
+    {
+        for (var i = 0; i < rows; i++)
+        {
+            board[i].ClearRow();
+        }
+    }
+    public void CreateNewBoard()
+    {
+        board = new Row[rows];
+        for (var i = 0; i < rows; i++)
+        {
+            board[i] = new Row(columns);
+        }
+
     }
 }
